@@ -1,0 +1,151 @@
+[1] four major errors
+    1. Compile Time Errors (Syntax Errors) - Error found by the compiler based on the syntax of your c++ like missing;
+    2. Compile Time Errors (Type Errors)- Error found by the compiler based on the mismaches between types declared or forgot to declare for your variables.
+    3. Link - Time Errors- Program consist of several compiled parts, called translation units or modules. Every function must be declared with exactly the same type in every translation unit in which is used if not thats a linker error.
+    4. Run Time Errors- No output produced or output produced is wrong after compiling and linking. 
+
+[2] What kind of errors can we ignore in student programs? 
+    - Misbehaving software, misbehaving system software is allowed to terminate after finding an error
+
+[3] What guarantees should every completed project offer?
+    - When you have considered all of the potential sources of errors: poor specifications, incomplete programs, unexpected arguments, unexpected inputs, unexpected state, logical errors
+
+[4] Three approches to eliminate errors in programs and produce acceptable software.
+    - Organize software to minimze errors.
+    - Eliminate most of the errors we made through debugging and testing.
+    - make sure the remaining errors are not serious.
+
+[5] What is a syntax error (5 examples)
+    - Error with making sure your code follows c++ rules. Maybe missing semi colon (;), mispelled type "doble", missing ')' 
+
+[6] Type error (5 examples)
+    - report mismatch between types and variables.
+    1. int x0 = arena(7,2); // error undeclared function
+    2. int x1 = area(7); // wrong number of arguments
+    3. int x2 = area("seven", 2); //1st argument has a wrong type
+    4. string x4 = 34939.33 // assigned the wrong type to the value of the var x4. 
+    5. int x5 = area(10.7,2) // truncates your value
+
+[7] Linker error
+    1.  area function is not defined or a variable or a type
+        int area (int length, int width);
+
+        int main () {
+            int x = area(2,3);
+        }
+    2. return and arg types must have exactly the same types as we use
+        int area (----THIS --->>> int length, int width);
+
+        int main () {
+            int x = area( ----MUST MATCH THIS ----> 2,3);
+        }
+    3. same name different types will not be matched and ignored
+         - double area(double x, double y);
+         - int area(int x, int y, char unit)
+
+[9] Logic error 
+    undectd logic errors leadind to crashes or wrong results. Program runs perfectly but didn't spit what you wanted.
+
+[12] Test if operation succeded? 
+    ran without errors and output is what you designed it for.
+
+[13] 
+    - caller of function handle run time error 
+        that means every time they call the function they have to make an error and handle it and then also access the function if they can to make sure they are referring to correct objects and values
+    - called (calle) of function handle run time error 
+        if there's an error we code it into the function so if we call that function the error is handled within it. We can call it 500 times and error will stay the same. 
+
+[14] When is throwing an exception preferred to throwing an error?
+    - Why don't people always check arguments in functions its so simple
+        - we can't modify the function definition
+        - the called function doesn't know what to do in case of error
+        - The Called function doesn't know where it was called from.
+        - Performance
+    Check arguments in function unless you don't have a good reason not to.
+
+    so..
+
+    the fundamental idea is to seperate detection of an error (which should be done in a called funtion)
+    from the handling of an error (which should be done in the calling function) while ensuring that a
+    detected error cannot be ignored; that is, exceptions provide mechanism that allows us to combine the
+    best of various approaches to error handling
+
+
+    again...
+
+    detection of error --> happens in the called function (callee) because that's where the problem is first noticed.
+    handling of error --> Handling of the error → often happens in the calling function (caller) usually main because 
+                        it has more context about what should be done.
+
+
+    1. No reasonable error value exist
+    2. The function must return a valid value;
+    3. ignoring error would be dangerous 
+
+[15]  when returning an "error value" preferable to throwing an exception?
+    1. when failure is part of normal workflow
+    2. When the caller is expected to check the result
+    3. When failure is common
+    4. When there is a natural return value representing failure
+
+[16] Describe process of how errors are thrown and caught
+
+     If a function finds an error that it cannot handle and it cannot expect its immediate called to handle,
+    It does not return normally: instead, it throws an exception indicating what went wrong. Any direct or 
+    indirect caller can catch the exception, that is specify what to do if the called code used throw.
+
+    A function expresses interest in exceptions it wants to handle in the catch parts pf the try block..
+
+    If no caller catches an exception the program terminates
+
+[18] What is an assertion?
+    A statement that states an invariant is called an assertion
+
+    IVARIANT - what must always be true about an object ex: constexp int x  = 3; x is equal to 3 always.
+
+[19] Precondition and Postcondition
+    
+
+    PRECONDITION
+    A requirment of a function upon its argument is often called a precondition.
+    must be true for the function to perform its action correctly.
+
+    1. document your precondition in the comments --> //comments lol
+    2. check the precondition --> Perhaps and if statement buddy
+    3. report violation of precondition --> throw() or error()
+
+    int my_complicated_function(int a, int b, int c)
+{
+    // the arguments are positive and a < b < c
+
+    if (!(0 < a && a < b && b < c))
+        error("Bad args");
+
+    // ...
+}
+
+    POSTCONDITION
+
+    Post conditions are conditions that you check after preconditions and function work have been done.
+    Basically is the result/state valid before returning?
+
+
+[22]
+
+    Steps in debugging
+    [1] Get the program to compile.
+    [2] Get the program to link.
+    [3] Get the program to do what you want it to do.
+
+[23] testing vs debugging'
+I'm testing making sure program works correctly before getting to finding errors i'm unaware of. Debugging is trying to find the bug in my code.
+testing is executing the program with a large nd systematically selected set of inputs and comparing the results to what was expected.
+
+[24 + 25] Random numbers and seed?
+
+random number is a number from a sequence of numbers where given the previous numbers, its hard or even imposible to determine the next.
+important in simulation, games, cryptography, security, and TESTING. when we want unpredictable results or inputs
+
+example: when testing a function it can be useful to call it with a series of random inputs to see if it responds appropriatley. 
+
+seed() function is used to make a sequence unpredictable. you "seed" it with something such as time of creation
