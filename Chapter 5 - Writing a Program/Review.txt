@@ -1,0 +1,61 @@
+[1] What do we mean by programming is understanding?
+    If you don't understand what your solving then your not programming correctly. 
+    Programming an effective solution to a problem mean you must understand the problem.
+
+[2] What a calc should do?
+    A calculator should be able to preform arithmatic on values entered weather it be +, - ,*, /.
+    It should be able to do it with order of operations. PEMDAS lol
+
+[3] How do we break up a problem into smaller manageable parts?
+    You just do. jk
+
+    1. Do you have any tools, libraries, etc that can help solve this problem?
+    2. Look for parts of a solution that can be seperatley described
+
+[4] Why is creating a small limited version a good idea?
+    When we start we rarley know the problem well. Only the process and combination of thinking 
+    about the problem (analysis) and experimentation (design and implementation) gives us the solid
+    understanding that we need to write a good program. 
+    1. to bring out problems in our understanding, ideas, and tools
+    2. to see if details of the problem statement need changing to make the problem manageble
+
+[5] Why is feature creep a bad idea?
+    because that expands the initial mimimum effort by adding features that arent initally needed. 
+    features creeping up lol.
+
+[6] What are the three main phases of software development.
+    Analysis - figure out what should be done wite a description of your current understanding of that. 
+        Set of requirment or a specification. 
+    Design - Create an overall structure for the system, deciding which parts the implementation should have and how those parts should communicate
+    implementation - write code, debug, and test it does what it's suppose to do
+
+[7] What is a "use case"?
+    A written description of how a user interacts with a software system to achieve a specific goal.
+
+[8] What is the purpose of testing?
+    In my fine opinion the purpose of testing is to make sure your code is working properly and 
+    continuing to produce outcomes that match the desired result of solving the problem.
+
+[9]Differences in Term, expression, number, primary
+    Term - A term is a Primary || a term ()
+    Expression - A expression is a term or an expression + term or an expression - a term
+    Number - A number is a floating point literal
+    Primary - A primary is a number or a "(" followed by an expression followed by an ")"
+
+[x] Grammer
+    defines the syntax of the input and then write a program thatimplements the rules of that gramme
+
+[12] What is a token?
+    A token is a sequence of characters that represents something we consider a unit, such as a number or an operator.
+
+[14] What is a class? What do we use classes for?
+    Class means user-defined type. 
+    Again a type holds the data we need and gives us useful operations on that data.
+    
+    In C++, a class is a user-defined type that groups together data and the functions 
+    that operate on that data into a single unit like a token.
+
+[x] What is a parsing and a parser?
+    Reading a stream of inputs according to a grammer is called parsing, 
+    and a program that does that is often called a parser
+
