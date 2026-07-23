@@ -1,9 +1,5 @@
 #include "PPPheaders.h"
 
-
-
-
-//
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
 //
@@ -29,14 +25,14 @@ public:
     char kind;        // what kind of token
     double value;     // for numbers: a value 
     Token(char ch)    // make a Token from a char
-        :kind(ch), value(0.0) { }
+        :kind(ch), value(0.0) { } // used for + - * ( simple stuff with no value member needed
     Token(char ch, double val)     // make a Token from a char and a double
         :kind(ch), value(val) { }
 };
 
 //------------------------------------------------------------------------------
 
-class Token_stream {
+class Token_stream { //Why? Becasue we need a way of reading input instead of each function worrying about converting raw input to a value we care about. Also provides get to get the next token and putback to put it back for later use from another function. We don't create copies here we use the same token stored in memory like int x = 3.
 public:
     Token_stream();   // make a Token_stream that reads from cin
     Token get();      // get a Token (get() is defined elsewhere)
@@ -80,9 +76,9 @@ Token Token_stream::get() //returns a type Token from
         error("No input");    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case ';':    // for "print"
-    case 'q':    // for "quit"
-    case '(': case ')': case '+': case '-': case '*': case '/':
+    case '=':    // for "print"
+    case 'x':    // for "quit"
+    case '(': case ')': case '+': case '-': case '*': case '/': case '{': case '}': case '!':
         return Token{ch};        // let each character represent itself
     case '.':
     case '0': case '1': case '2': case '3': case '4':
@@ -105,13 +101,22 @@ Token_stream ts;        // provides get() and putback()
 //------------------------------------------------------------------------------
 
 double expression();    // declaration so that primary() can call expression()
+double primary();
 
 //------------------------------------------------------------------------------
+//Deals with exponents
 
 // deal with numbers and parentheses
+int factorial(double n){
+    if (n <= 1) // Base case
+        return 1; 
+    return n * factorial(n - 1);
+}
+
 double primary()
 {
     Token t = ts.get();
+
     switch (t.kind) {
     case '(':    // handle '(' expression ')'
     {
@@ -121,8 +126,26 @@ double primary()
             error(" ')' expected");
         return d;
     }
-    case '8':            // we use '8' to represent a number
-        return t.value;  // return the number's value
+    case '{':    // handle '(' expression ')'
+    {
+        double d = expression();
+        t = ts.get();
+        if (t.kind != '}') 
+            error(" '}' expected");
+        return d;
+    }
+    case '8':{
+        double initial_value = 0;
+        Token t_2 = ts.get();
+        if (t_2.kind == '!'){
+            initial_value = factorial(t.value);
+            return initial_value;
+        }
+        ts.putback(t_2);
+        return t.value;
+        
+       
+    }
     default:
         error("primary expected");
     }
@@ -191,8 +214,8 @@ try
     while (cin) {
         Token t = ts.get();
 
-        if (t.kind == 'q') break; // 'q' for quit
-        if (t.kind == ';')        // ';' for "print now"
+        if (t.kind == 'x') break; // 'q' for quit
+        if (t.kind == '=')        // ';' for "print now"
             cout << "= " << val << '\n';
         else
             ts.putback(t);
